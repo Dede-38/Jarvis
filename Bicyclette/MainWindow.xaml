@@ -1,0 +1,138 @@
+﻿<Window x:Class="Bicyclette.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="JARVIS - Assistant IA"
+        Height="700" Width="1200"
+        Icon="Jarvis.ico"
+        Loaded="Window_Loaded"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        Foreground="{DynamicResource TextBrush}"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="1.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ===== ZONE CONVERSATION ===== -->
+        <DockPanel Grid.Column="0" Grid.RowSpan="2" LastChildFill="True" Margin="0,0,20,0">
+            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                <TextBlock Text="🨠 JARVIS - Assistant IA" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" />
+                <TextBlock x:Name="ModelLabel" FontSize="14" HorizontalAlignment="Center" Margin="0,2,0,0" />
+            </StackPanel>
+
+            <Border BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="10">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
+                </Border.Effect>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="ConversationTextBlock"
+                               TextWrapping="Wrap"
+                               FontSize="15"
+                               Background="Transparent"
+                               Foreground="{DynamicResource TextBrush}"/>
+                </ScrollViewer>
+            </Border>
+        </DockPanel>
+
+        <!-- ===== PANNEAU LATÉRAL DROIT ===== -->
+        <Border Grid.Column="1" Padding="15" BorderBrush="{DynamicResource TextBrush}" BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="517*"/>
+                    <RowDefinition Height="35*"/>
+                </Grid.RowDefinitions>
+                <DockPanel Margin="0,0,0,-92" Grid.RowSpan="2">
+                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                        <TextBlock Text="📂 Conversations" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+                        <Button x:Name="NouvelleConversationButton" 
+                                BorderBrush="{DynamicResource TextBrush}"
+                                Content="  Nouvelle Conversation"
+                                Click="NouvelleConversation_Click"
+                                Margin="0,0,0,5"
+                                Padding="6"
+                                Background="#FF3B82F6" Foreground="White" />
+                        <Button x:Name="SupprimerConversationButton" 
+                                BorderBrush="{DynamicResource TextBrush}" 
+                                Content="🗑️ Supprimer" 
+                                Click="SupprimerConversation_Click" 
+                                Margin="0,0,0,10" 
+                                Padding="6" 
+                                Background="#FFEF4444" Foreground="White" />
+
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="4">
+                            <ListBox x:Name="ConversationListBox" 
+                                     DisplayMemberPath="Title" 
+                                     SelectionChanged="ConversationListBox_SelectionChanged"
+                                     Background="Transparent"
+                                     Foreground="{DynamicResource TextBrush}" 
+                                     Height="300">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Renommer" Click="RenommerConversation_Click" />
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+                            </ListBox>
+                        </Border>
+                    </StackPanel>
+
+                    <Button x:Name="ThemeToggle" Content="🎨 Thème" Click="ThemeToggle_Click"  Width="75"  Height="30" Margin="39.9,0,0,0" />
+                    <Button x:Name="SettingsButton" Content="⚙️ Paramètres" Click="SettingsButton_Click"  Width="100" Height="30" Margin="20,0,0,0" />
+                </DockPanel>
+
+                <!-- ✅ Voice waves -->
+                <Canvas x:Name="VoiceWaves"
+                        Width="100" Height="40"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0,65,0,0"
+                        Visibility="Visible" RenderTransformOrigin="1.58,-0.4" Grid.Row="1">
+                    <Rectangle Width="5" Height="10" Fill="MediumSpringGreen" Canvas.Left="0" Canvas.Bottom="0"/>
+                    <Rectangle Width="5" Height="20" Fill="MediumSpringGreen" Canvas.Left="15" Canvas.Bottom="0"/>
+                    <Rectangle Width="5" Height="15" Fill="MediumSpringGreen" Canvas.Left="30" Canvas.Bottom="0"/>
+                    <Rectangle Width="5" Height="25" Fill="MediumSpringGreen" Canvas.Left="45" Canvas.Bottom="0"/>
+                    <Rectangle Width="5" Height="12" Fill="MediumSpringGreen" Canvas.Left="60" Canvas.Bottom="0"/>
+                </Canvas>
+            </Grid>
+        </Border>
+
+        <!-- ===== SAISIE & BOUTONS ===== -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Margin="0,20,20,0">
+            <Button x:Name="AjouterImageButton"
+                    BorderBrush="{DynamicResource TextBrush}"
+                    Content="🖼️" Width="45" Height="40"
+                    Click="AjouterImage_Click"
+                    ToolTip="Ajouter une image à la conversation" />
+
+            <TextBox x:Name="InputTextBox"
+                     Height="40"
+                     FontSize="14"
+                     VerticalContentAlignment="Center"
+                     KeyDown="InputTextBox_KeyDown"
+                     Margin="10,0"
+                     BorderBrush="{DynamicResource TextBrush}"
+                     HorizontalAlignment="Stretch"
+                     MinWidth="500"
+                     Padding="8" />
+
+            <Button x:Name="EnvoyerButton" Content="📤 Envoyer" Width="100" Height="40" Click="Envoyer_Click"
+                    Margin="10,0,0,0" Background="#FF10B981" Foreground="White" />
+            <Button x:Name="MicroButton" Content="🎤" Width="45" Height="40" Click="MicroButton_Click" ToolTip="Microphone" Margin="10,0,0,0" />
+        </StackPanel>
+    </Grid>
+</Window>

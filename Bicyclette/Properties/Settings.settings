@@ -1,0 +1,26 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Bicyclette.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Theme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Themes/LightTheme.xaml</Value>
+    </Setting>
+    <Setting Name="TypingDelayMs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">700</Value>
+    </Setting>
+    <Setting Name="ChatFontSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="ApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Langue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fr</Value>
+    </Setting>
+    <Setting Name="ModelGPT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">gpt-3.5-turbo
+
+</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

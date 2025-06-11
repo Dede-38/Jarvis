@@ -1,0 +1,24 @@
+[
+  {
+    "Id": "45b63bcb-64a6-4d0b-9bfc-196c201764d6",
+    "Title": "Coucou",
+    "Messages": [
+      "\uD83D\uDC64: A",
+      "\uD83E\uDD16: Erreur IA : You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "\uD83D\uDC64: Salut",
+      "\uD83E\uDD16: Erreur IA : You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "\uD83D\uDC64: A",
+      "\uD83E\uDD16: Erreur IA : You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+      "\uD83D\uDC64: Salut",
+      "\uD83E\uDD16: Bonjour ! Comment puis-je vous aider aujourd\u0027hui ?",
+      "\uD83D\uDC64: Qui est DarkFeather",
+      "\uD83E\uDD16: Je ne dispose pas d\u0027informations sp\u00E9cifiques sur \u0022DarkFeather\u0022 dans mes donn\u00E9es jusqu\u0027en octobre 2023. Pouvez-vous pr\u00E9ciser le contexte ou donner plus de d\u00E9tails ? Par exemple, s\u0027agit-il d\u0027un nom d\u0027utilisateur en ligne, d\u0027un personnage, ou autre chose ? Je serai heureux de vous aider davantage !",
+      "\uD83D\uDC64: a",
+      "\uD83E\uDD16: Je suis d\u00E9sol\u00E9, mais je n\u0027ai pas d\u0027informations sur \u0022DarkFeather\u0022. Pouvez-vous m\u0027en dire plus ou pr\u00E9ciser votre demande ?",
+      "\uD83D\uDC64: a",
+      "\uD83E\uDD16: Bonjour ! Comment puis-je vous aider aujourd\u0027hui ?",
+      "\uD83D\uDC64: a",
+      "\uD83E\uDD16: Bonjour ! Je suis l\u00E0 pour vous aider. Que puis-je faire pour vous aujourd\u0027hui ?"
+    ]
+  }
+]
