@@ -22,12 +22,12 @@
         <StackPanel Margin="30,20,30,20" Orientation="Vertical" VerticalAlignment="Top">
 
             <!-- 🎯 Modèle IA -->
-            <GroupBox Header="🎯 Modèle IA">
+            <GroupBox Header="🎯 Modèle IA" Height="73">
                 <StackPanel>
                     <ComboBox x:Name="ModelComboBox"
                               Width="250"
                               SelectionChanged="ModelComboBox_SelectionChanged"
-                              Margin="0,5"/>
+                              Margin="0,5" Height="24"/>
                     <TextBlock x:Name="LabelApercu"
                                FontStyle="Italic"
                                FontSize="13"
@@ -36,10 +36,18 @@
             </GroupBox>
 
             <!-- 🌐 Langue -->
-            <GroupBox Header="🌐 Langue">
+            <GroupBox Header="🌐 Langue" RenderTransformOrigin="0.5,0.5" Height="69">
+                <GroupBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.685"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.388"/>
+                    </TransformGroup>
+                </GroupBox.RenderTransform>
                 <ComboBox x:Name="LangueComboBox"
                           Width="250"
-                          SelectionChanged="LangueComboBox_SelectionChanged">
+                          SelectionChanged="LangueComboBox_SelectionChanged" Height="23" Margin="25,0,25,0">
                     <ComboBoxItem Content="Français" Tag="fr" />
                     <ComboBoxItem Content="English" Tag="en" />
                     <ComboBoxItem Content="Español" Tag="es" />
@@ -50,15 +58,6 @@
                 </ComboBox>
             </GroupBox>
 
-            <!-- 🎨 Thème -->
-            <GroupBox Header="🎨 Thème">
-                <ComboBox x:Name="ThemeComboBox"
-                          Width="150"
-                          SelectedIndex="0">
-                    <ComboBoxItem Content="Clair"/>
-                    <ComboBoxItem Content="Sombre"/>
-                </ComboBox>
-            </GroupBox>
 
             <!-- 🕐 Vitesse de réponse -->
             <GroupBox Header="🕐 Vitesse de réponse (ms)">
@@ -85,13 +84,49 @@
             </GroupBox>
 
             <!-- 🔑 Clé API -->
-            <GroupBox Header="🔑 Clé API OpenAI">
+            <GroupBox Header="🔑 Clé API OpenAI" Height="62">
                 <PasswordBox x:Name="ApiKeyBox"
                              Width="300"
                              PasswordChanged="ApiKeyBox_PasswordChanged"/>
             </GroupBox>
 
             <!-- ✅ Boutons -->
+            <ToggleButton x:Name="ThemeToggle"
+  Width="50" Height="25"
+  HorizontalAlignment="Right"
+  VerticalAlignment="Top"
+  Margin="10"
+  Checked="ThemeToggle_Checked"
+  Unchecked="ThemeToggle_Unchecked">
+                <ToggleButton.Style>
+                    <Style TargetType="ToggleButton">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Grid Width="50" Height="25" Background="Transparent">
+                                        <Border x:Name="SwitchBorder"
+                        Width="50" Height="25"
+                        CornerRadius="12.5"
+                        Background="#FF404040"/>
+                                        <Ellipse x:Name="SwitchThumb"
+                         Width="20" Height="20"
+                         Margin="3"
+                         Fill="White"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="SwitchBorder" Property="Background" Value="#FF2196F3"/>
+                                            <Setter TargetName="SwitchThumb" Property="HorizontalAlignment" Value="Right"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,0">
                 <Button Content="✅ Valider"
                         Width="100"

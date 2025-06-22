@@ -83,6 +83,34 @@ namespace Bicyclette
             }
         }
 
+        private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            AppliquerTheme("Themes/DarkTheme.xaml");
+        }
+
+        private void ThemeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AppliquerTheme("Themes/LightTheme.xaml");
+        }
+
+        private void AppliquerTheme(string cheminTheme)
+        {
+            var newDict = new ResourceDictionary { Source = new Uri(cheminTheme, UriKind.Relative) };
+            var existingDict = Application.Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null &&
+                                     (d.Source.OriginalString.Contains("LightTheme") ||
+                                      d.Source.OriginalString.Contains("DarkTheme")));
+
+            if (existingDict != null)
+                Application.Current.Resources.MergedDictionaries.Remove(existingDict);
+
+            Application.Current.Resources.MergedDictionaries.Add(newDict);
+
+            Properties.Settings.Default.Theme = cheminTheme;
+            Properties.Settings.Default.Save();
+        }
+
+
 
         private void ModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
