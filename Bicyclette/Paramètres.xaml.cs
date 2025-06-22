@@ -153,16 +153,20 @@ namespace Bicyclette
         }
 
 
-
         private void LangueComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (LangueComboBox.SelectedItem is string langue)
+            try
             {
-                Properties.Settings.Default.Langue = langue;
-                Properties.Settings.Default.Save();
-                TraductionManager.Langue = langue;
-
-                // Pas de MessageBox ici pour éviter popup à chaque changement de langue
+                if (LangueComboBox.SelectedItem is ComboBoxItem item && item.Tag is string langue)
+                {
+                    Properties.Settings.Default.Langue = langue;
+                    Properties.Settings.Default.Save();
+                    TraductionManager.Langue = langue;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de l'enregistrement de la langue : " + ex.Message);
             }
         }
 

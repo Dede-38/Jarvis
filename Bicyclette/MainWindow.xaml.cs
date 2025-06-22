@@ -24,7 +24,6 @@ namespace Bicyclette
         }
 
         private EtatMicro etatMicro = EtatMicro.Inactif;
-        private bool isDarkTheme = false;
         private Conversation conversationActive;
         private SpeechListener speechListener;
 
@@ -309,7 +308,7 @@ namespace Bicyclette
                     MessageBox.Show(
                         $"Erreur lors de la connexion à l'IA\n\n🔁 Code HTTP : {(int)response.StatusCode} {response.StatusCode}\n📩 Détail : {apiErrorMessage}",
                         "Erreur API"
-             
+
                     );
 
                     return $"Erreur IA : {apiErrorMessage}";
@@ -332,7 +331,7 @@ namespace Bicyclette
         }
 
 
-       
+
 
         // ======= CHANGEMENT CONVERSATION =======
         private void ConversationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -443,29 +442,6 @@ namespace Bicyclette
                 conversationActive.Messages.Add(TraductionManager.T("ImageInseree"));
                 ConversationManager.Save();
             }
-        }
-
-        // ======= BOUTON THEME SOMBRE/CLAIR =======
-        private void ThemeToggle_Click(object sender, RoutedEventArgs e)
-        {
-            string current = Properties.Settings.Default.Theme;
-            string newTheme = current == "Themes/DarkTheme.xaml"
-                ? "Themes/LightTheme.xaml"
-                : "Themes/DarkTheme.xaml";
-
-            var newDict = new ResourceDictionary { Source = new Uri(newTheme, UriKind.Relative) };
-            var existingDict = Application.Current.Resources.MergedDictionaries
-                .FirstOrDefault(d => d.Source != null &&
-                                     (d.Source.OriginalString.Contains("LightTheme") ||
-                                      d.Source.OriginalString.Contains("DarkTheme")));
-
-            if (existingDict != null)
-                Application.Current.Resources.MergedDictionaries.Remove(existingDict);
-
-            Application.Current.Resources.MergedDictionaries.Add(newDict);
-
-            Properties.Settings.Default.Theme = newTheme;
-            Properties.Settings.Default.Save();
         }
     }
 }
