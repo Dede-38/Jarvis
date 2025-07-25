@@ -26,101 +26,126 @@
         </Grid.RowDefinitions>
 
         <!-- ===== ZONE CONVERSATION ===== -->
-        <DockPanel Grid.Column="0" Grid.RowSpan="2" LastChildFill="True" Margin="0,0,20,0">
-            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
-                
+        <Grid Grid.Column="0" Grid.Row="0" Margin="0,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <TextBlock Text="JARVIS - Assistant IA" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" />
                 <TextBlock x:Name="ModelLabel" FontSize="14" HorizontalAlignment="Center" Margin="0,2,0,0" />
             </StackPanel>
 
-            <Border BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="10">
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="10">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
                 </Border.Effect>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer x:Name="ConversationScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <TextBlock x:Name="ConversationTextBlock"
                                TextWrapping="Wrap"
                                FontSize="15"
                                Background="Transparent"
-                               Foreground="{DynamicResource TextBrush}"/>
+                               Foreground="{DynamicResource TextBrush}" />
                 </ScrollViewer>
             </Border>
-        </DockPanel>
+        </Grid>
 
-        <!-- ===== PANNEAU LATÉRAL DROIT ===== -->
-        <Border Grid.Column="1" Padding="15" BorderBrush="{DynamicResource TextBrush}" BorderThickness="1">
+        <!-- ===== ZONE SAISIE ===== -->
+		<Grid Grid.Column="0" Grid.Row="1" Margin="0,10,20,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<!-- Zone de texte multiligne -->
+			<TextBox x:Name="InputTextBox"
+					 Grid.Column="0"
+					 AcceptsReturn="True"
+					 TextWrapping="Wrap"
+					 VerticalScrollBarVisibility="Auto"
+					 MinHeight="50"
+					 MaxHeight="150"
+					 Height="Auto"
+					 VerticalAlignment="Top"
+					 Margin="0,0,5,0"
+					 KeyDown="InputTextBox_KeyDown" />
+
+			<Button x:Name="EnvoyerButton"
+					Grid.Column="1"
+					Click="Envoyer_Click"
+					Padding="15,5"
+					Content="Send" />
+
+			<!-- Bouton Micro -->
+			<Button x:Name="MicroButton"
+					Grid.Column="2"
+					Click="MicroButton_Click"
+					Padding="10,5"
+					Margin="0,0,5,0"
+					Content="🎤" />
+
+			<!-- Bouton Image -->
+			<Button x:Name="AjouterImageButton"
+					Grid.Column="3"
+					Click="AjouterImage_Click"
+					Padding="10,5"
+					Margin="0,0,5,0"
+					Content="🖼️" />
+
+			<!-- Bouton Envoyer -->
+			
+		</Grid>
+
+
+
+
+		<!-- ===== PANNEAU LATÉRAL DROIT ===== -->
+        <Border Grid.Column="1" Grid.RowSpan="2" Padding="15" BorderBrush="{DynamicResource TextBrush}" BorderThickness="1">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
             </Border.Effect>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="517*"/>
-                    <RowDefinition Height="35*"/>
-                </Grid.RowDefinitions>
-                <DockPanel Margin="0,0,0,-92" Grid.RowSpan="2">
-                    <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
-                        <TextBlock Text="📂 Conversations" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
-                        <Button x:Name="NouvelleConversationButton" 
-                                BorderBrush="{DynamicResource TextBrush}"
-                                Content="  Nouvelle Conversation"
-                                Click="NouvelleConversation_Click"
-                                Margin="0,0,0,5"
-                                Padding="6"
-                                Background="#FF3B82F6" Foreground="White" />
-                        <Button x:Name="SupprimerConversationButton" 
-                                BorderBrush="{DynamicResource TextBrush}" 
-                                Content="🗑️ Supprimer" 
-                                Click="SupprimerConversation_Click" 
-                                Margin="0,0,0,10" 
-                                Padding="6" 
-                                Background="#FFEF4444" Foreground="White" />
+            <StackPanel>
+                <TextBlock Text="📂 Conversations" FontWeight="Bold" FontSize="16" Margin="0,0,0,10" />
+                <Button x:Name="NouvelleConversationButton" 
+                        BorderBrush="{DynamicResource TextBrush}"
+                        Content="  Nouvelle Conversation"
+                        Click="NouvelleConversation_Click"
+                        Margin="0,0,0,5"
+                        Padding="6"
+                        Background="#FF3B82F6" Foreground="White" />
+                <Button x:Name="SupprimerConversationButton" 
+                        BorderBrush="{DynamicResource TextBrush}" 
+                        Content="🗑️ Supprimer" 
+                        Click="SupprimerConversation_Click" 
+                        Margin="0,0,0,10" 
+                        Padding="6" 
+                        Background="#FFEF4444" Foreground="White" />
 
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="4">
-                            <ListBox x:Name="ConversationListBox" 
-                                     DisplayMemberPath="Title" 
-                                     SelectionChanged="ConversationListBox_SelectionChanged"
-                                     Background="Transparent"
-                                     Foreground="{DynamicResource TextBrush}" 
-                                     Height="300">
-                                <ListBox.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Renommer" Click="RenommerConversation_Click" />
-                                    </ContextMenu>
-                                </ListBox.ContextMenu>
-                            </ListBox>
-                        </Border>
-                    </StackPanel>
+                <Border BorderThickness="1" BorderBrush="{DynamicResource TextBrush}" Padding="4">
+                    <ListBox x:Name="ConversationListBox" 
+                             DisplayMemberPath="Title" 
+                             SelectionChanged="ConversationListBox_SelectionChanged"
+                             Background="Transparent"
+                             Foreground="{DynamicResource TextBrush}" 
+                             Height="300">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Renommer" Click="RenommerConversation_Click" />
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                    </ListBox>
+                </Border>
 
-                    <Button x:Name="SettingsButton" Content="⚙️ Paramètres" Click="SettingsButton_Click"  Width="100" Height="30" Margin="20,0,0,0" />
-                </DockPanel>
-
-                
-            </Grid>
+                <Button x:Name="SettingsButton"
+                        Content="⚙️ Paramètres"
+                        Click="SettingsButton_Click"
+                        Width="100" Height="30"
+                        Margin="0,20,0,0" />
+            </StackPanel>
         </Border>
-
-        <!-- ===== SAISIE & BOUTONS ===== -->
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Margin="0,20,20,0">
-            <Button x:Name="AjouterImageButton"
-                    BorderBrush="{DynamicResource TextBrush}"
-                    Content="🖼️" Width="45" Height="40"
-                    Click="AjouterImage_Click"
-                    ToolTip="Ajouter une image à la conversation" />
-
-            <TextBox x:Name="InputTextBox"
-                     Height="40"
-                     FontSize="14"
-                     VerticalContentAlignment="Center"
-                     KeyDown="InputTextBox_KeyDown"
-                     Margin="10,0"
-                     BorderBrush="{DynamicResource TextBrush}"
-                     HorizontalAlignment="Stretch"
-                     MinWidth="500"
-                     Padding="8" />
-
-            <Button x:Name="EnvoyerButton" Content="📤 Envoyer" Width="100" Height="40" Click="Envoyer_Click"
-                    Margin="10,0,0,0" Background="#FF10B981" Foreground="White" />
-            <Button x:Name="MicroButton" Content="🎤" Width="45" Height="40" Click="MicroButton_Click" ToolTip="Microphone" Margin="10,0,0,0" />
-        </StackPanel>
     </Grid>
 </Window>
