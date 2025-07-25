@@ -26,13 +26,10 @@
         </Grid.RowDefinitions>
 
         <!-- ===== ZONE CONVERSATION ===== -->
-        <Grid Grid.Column="0" Grid.Row="0" Margin="0,0,20,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+        <!-- ===== Test ===== -->
+        <DockPanel Grid.Column="0" Grid.RowSpan="2" LastChildFill="True" Margin="0,0,20,0">
+            <StackPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                
                 <TextBlock Text="JARVIS - Assistant IA" FontSize="26" FontWeight="Bold" HorizontalAlignment="Center" />
                 <TextBlock x:Name="ModelLabel" FontSize="14" HorizontalAlignment="Center" Margin="0,2,0,0" />
             </StackPanel>
